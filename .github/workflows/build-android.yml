@@ -17,10 +17,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Unzip project
-     run: |
-       ZIPFILE=$(ls *.zip | head -n 1)
-       echo "Memakai file: $ZIPFILE"
-       unzip -o "$ZIPFILE" -d .
+        run: |
+          ZIPFILE=$(ls *.zip | head -n 1)
+          echo "Memakai file: $ZIPFILE"
+          unzip -o "$ZIPFILE" -d .
+          ls -la TracRun
+
       - name: Setup export templates
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates
