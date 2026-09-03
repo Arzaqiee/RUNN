@@ -1,0 +1,40 @@
+name: Build TRAC RUN APK
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  export-android:
+    name: Android Export
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:4.3
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Unzip project
+        run: unzip -o TracRun.zip -d .
+
+      - name: Setup export templates
+        run: |
+          mkdir -v -p ~/.local/share/godot/export_templates
+          mv /root/.local/share/godot/export_templates/4.3.stable ~/.local/share/godot/export_templates/4.3.stable
+
+      - name: Import project resources
+        run: godot --headless --path TracRun --import || true
+
+      - name: Create build folder
+        run: mkdir -v -p build
+
+      - name: Build APK
+        run: godot --headless --path TracRun --export-debug "Android" ../build/TRAC-RUN.apk
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: TRAC-RUN-apk
+          path: build/TRAC-RUN.apk
