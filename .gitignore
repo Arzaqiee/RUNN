@@ -1,0 +1,21 @@
+# Godot 4 specific ignores
+.godot/
+.import/
+export.cfg
+# export_presets.cfg SENGAJA tidak di-ignore supaya GitHub Actions
+# bisa export APK otomatis. Ini aman karena tidak berisi keystore
+# atau password asli (pakai debug keystore bawaan Godot).
+
+# Build output
+android/build/
+*.apk
+*.aab
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.tmp
+
+# Keystores - JANGAN pernah commit keystore asli
+*.keystore
+*.jks

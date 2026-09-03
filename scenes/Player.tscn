@@ -1,0 +1,109 @@
+[gd_scene load_steps=6 format=3 uid="uid://player_trac_run"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(60, 90)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_body"]
+bg_color = Color(0.24, 0.84, 0.96, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_left = 18
+corner_radius_bottom_right = 18
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.106, 0.122, 0.231, 1)
+shadow_color = Color(0, 0, 0, 0.25)
+shadow_size = 8
+shadow_offset = Vector2(0, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eye"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_left = 14
+corner_radius_bottom_right = 14
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.106, 0.122, 0.231, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pupil"]
+bg_color = Color(0.106, 0.122, 0.231, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_left = 5
+corner_radius_bottom_right = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_shield"]
+bg_color = Color(0.4, 0.85, 1, 0.4)
+corner_radius_top_left = 36
+corner_radius_top_right = 36
+corner_radius_bottom_left = 22
+corner_radius_bottom_right = 22
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.6, 0.95, 1, 0.9)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1")
+collision_layer = 2
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -45)
+shape = SubResource("RectangleShape2D_1")
+
+[node name="BodyVisual" type="Panel" parent="."]
+offset_left = -32.0
+offset_top = -90.0
+offset_right = 32.0
+offset_bottom = 0.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_body")
+
+[node name="Eyes" type="Node2D" parent="BodyVisual"]
+position = Vector2(32, 28)
+
+[node name="EyeWhiteL" type="Panel" parent="BodyVisual/Eyes"]
+offset_left = -18.0
+offset_top = -9.0
+offset_right = -4.0
+offset_bottom = 9.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_eye")
+
+[node name="PupilL" type="Panel" parent="BodyVisual/Eyes/EyeWhiteL"]
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 12.0
+offset_bottom = 12.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pupil")
+
+[node name="EyeWhiteR" type="Panel" parent="BodyVisual/Eyes"]
+offset_left = 4.0
+offset_top = -9.0
+offset_right = 18.0
+offset_bottom = 9.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_eye")
+
+[node name="PupilR" type="Panel" parent="BodyVisual/Eyes/EyeWhiteR"]
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 12.0
+offset_bottom = 12.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pupil")
+
+[node name="ShieldVisual" type="Node2D" parent="."]
+visible = false
+
+[node name="ShieldCircle" type="Panel" parent="ShieldVisual"]
+offset_left = -42.0
+offset_top = -97.0
+offset_right = 42.0
+offset_bottom = 7.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_shield")
